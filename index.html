@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="jxmTpFCKGQ5u95CSTDddER">
+<head data-page-node-id="P7zqXZRIBusSdH2DHsGkTC">
+<meta charset="utf-8" data-page-node-id="QHBX5Da0wCJuWqfthbfOoQ">
+<meta name="viewport" content="width=device-width, initial-scale=1" data-page-node-id="nqzGLRUzghcPm65RHYpl37">
+<title>青甘自驾行程地图 · 9/22–9/27</title>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; color: #1a1a1a; }
+  #wrap { display: flex; height: 100vh; }
+  #side { width: 350px; flex: 0 0 350px; overflow-y: auto; background: #fafaf8; border-right: 0.5px solid rgba(0,0,0,0.12); padding: 16px; box-sizing: border-box; }
+  #map { flex: 1; height: 100vh; }
+  h1 { font-size: 15px; font-weight: 500; margin: 0 0 4px; }
+  .sub { font-size: 12px; color: #6b6b6b; margin: 0 0 12px; line-height: 1.6; }
+  .row { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+  .row button { flex: 1; font-size: 12px; padding: 6px 4px; }
+  .row button.on { border: 2px solid #185FA5; padding: 5px 3px; }
+  .day { background: #fff; border: 0.5px solid rgba(0,0,0,0.12); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; }
+  .day:hover { border-color: rgba(0,0,0,0.3); }
+  .day.on { border: 2px solid #185FA5; padding: 11px 13px; }
+  .day h2 { font-size: 13px; font-weight: 500; margin: 0 0 2px; display: flex; align-items: center; gap: 8px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 10px; display: inline-block; }
+  .day p { font-size: 12px; color: #6b6b6b; margin: 4px 0 0; line-height: 1.7; }
+  .legend { font-size: 12px; color: #6b6b6b; line-height: 1.9; margin-top: 10px; border-top: 0.5px solid rgba(0,0,0,0.12); padding-top: 12px; }
+  .tip { font-size: 11px; color: #8a8a8a; line-height: 1.6; margin-top: 10px; }
+  #keygate { position: fixed; inset: 0; z-index: 99; display: none; align-items: center; justify-content: center; background: rgba(20,20,20,0.35); backdrop-filter: blur(2px); }
+  #keygate.show { display: flex; }
+  #keygate .card { background: #fff; border-radius: 14px; padding: 22px 24px; width: 380px; max-width: calc(100vw - 40px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+  #keygate h3 { margin: 0 0 8px; font-size: 15px; font-weight: 500; }
+  #keygate p { margin: 0 0 14px; font-size: 12px; color: #6b6b6b; line-height: 1.75; }
+  #keygate input { width: 100%; box-sizing: border-box; font-size: 13px; padding: 9px 10px; border: 1px solid rgba(0,0,0,0.2); border-radius: 8px; outline: none; }
+  #keygate input:focus { border-color: #185FA5; }
+  #keygate .btns { display: flex; gap: 8px; margin-top: 12px; }
+  #keygate button { flex: 1; font-size: 13px; padding: 9px 0; border-radius: 8px; border: 1px solid rgba(0,0,0,0.2); background: #fff; cursor: pointer; }
+  #keygate button.primary { background: #185FA5; color: #fff; border-color: #185FA5; }
+  #keygate a { color: #185FA5; }
+</style>
+<script type="text/javascript">
+(function () {
+  // 本地预览时 WorkBuddy 会把下面这行替换成可用的代理地址；
+  // 发布到 GitHub Pages 后占位符原样保留，此时改用官方域名 + 自备 key。
+  var RAW_PROXY = 'http://127.0.0.1:__WB_HTTP_PORT__/_TMapService/_wbt/__WB_TMAP_SECRET__';
+  var LOCAL = RAW_PROXY.indexOf('__WB_') === -1;
+  var q = new URLSearchParams(location.search);
+  window.__TMAP_LOCAL = LOCAL;
+  window.__TMAP_KEY = q.get('key') || localStorage.getItem('tmap_key') || '';
+  window._TMapSecurityConfig = { serviceHost: LOCAL ? RAW_PROXY : 'https://apis.map.qq.com' };
+})();
+</script>
+<script type="text/javascript">
+(function () {
+  var s = document.createElement('script');
+  s.src = 'https://map.qq.com/api/gljs?v=1.exp' + (window.__TMAP_KEY ? '&key=' + encodeURIComponent(window.__TMAP_KEY) : '');
+  s.async = false;
+  s.onerror = function () { window.__tmapFailed = true; };
+  document.head.appendChild(s);
+})();
+</script>
+</head>
+<body data-page-node-id="b0ozagqcXArqu0hWhBKF2o">
+<div id="wrap" data-page-node-id="pjXQJ8ZHxZDOqWabvk1M93">
+  <div id="side" data-page-node-id="xaxI4IDi0oL2gy2YBLFRJ1">
+    <h1 data-page-node-id="7W3IO9CCvluwZpPxBJmhoy">青甘自驾 · 9/22–9/27</h1>
+    <p class="sub" data-page-node-id="24vuT9i5QYJVBMI5qv9uHG">西宁曹家堡机场出发，嘉峪关机场飞走，全程约 2100km。地图共 41 个点，点击标记看说明；点击某一天可高亮当天路线。</p>
+
+    <div class="row" data-page-node-id="GIbTWVv3JQdLoCOL3vGzDE">
+      <button onclick="fitRoute()" data-page-node-id="3mI8wgbHB8pidQEJOqaxMn">行程视图</button>
+      <button onclick="fitChina()" data-page-node-id="4I8ReLkJdfz2maV8QyCTGf">全国视图</button>
+    </div>
+    <div class="row" id="filters" data-page-node-id="yMURGKfS1cEx8igvgGLBx3">
+      <button data-f="all" class="on" onclick="setFilter('all')" data-page-node-id="67nNH8H0UuDTcgzg3Jw9Xh">全部点</button>
+      <button data-f="plan" onclick="setFilter('plan')" data-page-node-id="ZKrZJwO7hMY3wwdNrgi9nJ">仅已定</button>
+      <button data-f="opt" onclick="setFilter('opt')" data-page-node-id="0rXp7msJ9LegaLH7U4jeeR">可选点</button>
+      <button data-f="museum" onclick="setFilter('museum')" data-page-node-id="JSoJr19cJGLAbDzFe2jPNO">博物馆</button>
+    </div>
+
+    <div id="days" data-page-node-id="gjyUhpw6wG7QSLxbAwhkcP"></div>
+
+    <div class="legend" data-page-node-id="jYKwKO6uJ3YmheGkMWFcvP">
+      <div data-page-node-id="hHXATbog08LLQVI8wv6irR"><span class="dot" style="background:#185FA5" data-page-node-id="5ThAHDUrTuw9Xh8SNOGI6t"></span> 蓝色大点（带序号）= 住宿地</div>
+      <div data-page-node-id="4WJ6rtPDjEPc3HIEx1fjWk"><span class="dot" style="background:#993C1D" data-page-node-id="hRP4VvLDkgNyGHlkrqpdXf"></span> 橙色 = 行程已定的点</div>
+      <div data-page-node-id="T1W4vc1nu8eRj0Qaf7uhWK"><span class="dot" style="background:#7F77DD" data-page-node-id="2cqXC5I4ZKAs4q8DDOHHWq"></span> 紫色 = 可选加的点</div>
+      <div data-page-node-id="w99T88Dw1NTAZJbuVUoiZG"><span class="dot" style="background:#0F6E56" data-page-node-id="Hya8HhKDm9OrsE5II7pVDz"></span> 绿色 = 博物馆 / 文化馆</div>
+    </div>
+    <p class="tip" data-page-node-id="xEY7oLEH8OEekDUyZSfa6l">点位为 GCJ-02 近似坐标，用于行程示意；实际导航请以地图 App 搜索的景区大门为准。底图为腾讯地图，国界与行政区划按国家标准绘制。</p>
+  </div>
+  <div id="map" data-page-node-id="N8t0fQ6ZCXlt7uepYYL3FP"></div>
+</div>
+
+<div id="keygate">
+  <div class="card">
+    <h3>需要腾讯地图 Key 才能显示底图</h3>
+    <p>本页在 GitHub Pages 上运行时，地图底图要走腾讯位置服务官方接口，需要一个免费 Key：<br>
+    1. 打开 <a href="https://lbs.qq.com/dev/console/application/mine" target="_blank" rel="noopener">lbs.qq.com</a> 注册并创建应用，拿到 Key；<br>
+    2. 在该 Key 的「域名白名单」里填上 <code>lyonliqima.github.io</code>；<br>
+    3. Key 会保存在这台设备的浏览器里，之后打开就不用再填。<br>
+    也可以直接在网址后面加 <code>?key=你的Key</code> 打开。</p>
+    <input id="keyinput" type="text" placeholder="粘贴腾讯地图 Key" autocomplete="off">
+    <div class="btns">
+      <button onclick="document.getElementById('keygate').classList.remove('show')">稍后再说</button>
+      <button class="primary" onclick="saveKey()">保存并加载地图</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const days = [
+  { id:'d1', color:'#185FA5', date:'9/22 周二', route:'西宁机场 → 德令哈', dist:'约 500km · 5.5h',
+    desc:'12:00 出发。沿途二选一：青海湖南岸观景台（免费）或茶卡盐湖傍晚。住德令哈全季。',
+    path:[[36.530,102.040],[36.68,101.26],[36.60,100.30],[36.78,99.08],[37.375,97.372]] },
+  { id:'d2', color:'#0F6E56', date:'9/23 周三', route:'德令哈 → 冷湖镇', dist:'约 520km · 6h',
+    desc:'07:30 出发，琉璃湖 2h（上午光最好），下午大柴旦翡翠湖，夜宿冷湖看星空。',
+    path:[[37.375,97.372],[37.63,96.75],[37.848,95.303],[37.858,95.240],[38.10,94.30],[38.746,93.380]] },
+  { id:'d3', color:'#BA7517', date:'9/24 周四', route:'冷湖 → 敦煌', dist:'约 450km · 5.5h',
+    desc:'俄博梁火星营地（需四驱+办手续）或冷湖石油遗址；经当金山口、阿克塞石油小镇到敦煌。',
+    path:[[38.746,93.380],[39.290,94.280],[39.630,94.290],[40.142,94.662]] },
+  { id:'d4', color:'#993C1D', date:'9/25 周五', route:'敦煌 → 瓜州', dist:'约 130km · 1.5h',
+    desc:'莫高窟 11:00 场次（10:30 前到数字展示中心），下午瓜州大地之子看日落，住瓜州。',
+    path:[[40.142,94.662],[40.35,95.20],[40.522,95.781],[40.360,95.920]] },
+  { id:'d5', color:'#7F77DD', date:'9/26 周六', route:'瓜州 → 嘉峪关', dist:'约 330km · 4h',
+    desc:'上午榆林窟，下午嘉峪关关城 + 长城第一墩。联票 110 元、3 天有效。',
+    path:[[40.522,95.781],[40.040,95.930],[40.522,95.781],[40.300,97.730],[39.796,98.278]] },
+  { id:'d6', color:'#D4537E', date:'9/27 周日', route:'嘉峪关 → 机场', dist:'市区约 13km',
+    desc:'晨光爬悬壁长城，上午新城魏晋墓砖壁画博物馆，午餐后机动，晚间航班离开。',
+    path:[[39.796,98.278],[39.860,98.220],[39.920,98.400]] }
+];
+
+const N = [
+  { k:'stay', n:'西宁曹家堡机场', p:[36.530,102.040], t:'9/22 12:00 出发', d:'取车后约 13:00 上路。中途在茶卡或德令哈加满油，海拔 2260 → 2980m。' },
+  { k:'stay', n:'德令哈（住全季）', p:[37.375,97.372], t:'9/22 晚抵达', d:'海拔约 2980m，第一晚别喝酒、别剧烈运动。晚上可逛海子诗歌陈列馆。' },
+  { k:'stay', n:'冷湖镇（住）', p:[38.746,93.380], t:'9/23 夜', d:'全国顶级暗夜保护区，入住后夜里看星空。补给有限，务必提前加满油。' },
+  { k:'stay', n:'敦煌（住）', p:[40.142,94.662], t:'9/24 夜', d:'鸣沙山月牙泉可选傍晚或次日清晨；沙洲夜市晚上很热闹。' },
+  { k:'stay', n:'瓜州（住）', p:[40.522,95.781], t:'9/25 夜', d:'住宿条件一般。也可夜驾到嘉峪关，但榆林窟就成了回头路。' },
+  { k:'stay', n:'嘉峪关（住）', p:[39.796,98.278], t:'9/26 夜', d:'吃烤肉去富强市场、大唐美食街；早餐糊锅只在上午营业。' },
+
+  { k:'plan', n:'莫高窟', p:[40.040,94.810], t:'9/25 11:00 场次', d:'10:30 前到数字展示中心（不是窟区），A 类全程约 3.5h，14:30 出来。洞窟内禁拍。特窟 11:00–14:00 现场排队。' },
+  { k:'plan', n:'琉璃湖（奶子湖）', p:[37.489,97.627], t:'9/23 08:40–10:40', d:'市区东北约 42km，末段 15km 非铺装河谷路，移动无信号，天气不佳切勿进入。免费、无补给。' },
+  { k:'plan', n:'大柴旦翡翠湖', p:[37.858,95.240], t:'9/23 15:30–17:00', d:'G315 路边的盐湖群，顺路停留 1.5h。傍晚光线最好，但等你到冷湖还得再开 3h。' },
+  { k:'plan', n:'阿克塞石油小镇', p:[39.630,94.290], t:'9/24 下午', d:'博罗转井，废弃老县城，《九层妖塔》取景地，顺路停留 1h。' },
+  { k:'plan', n:'大地之子·无界', p:[40.360,95.920], t:'9/25 傍晚', d:'瓜州戈壁雕塑长廊，免费，日落（约 19:20）光线最好，之后开回瓜州约 40 分钟。' },
+  { k:'plan', n:'榆林窟', p:[40.040,95.930], t:'9/26 09:00–11:00', d:'莫高窟姊妹窟，人少。西夏壁画《玄奘取经图》比《西游记》成书早三百年；特窟现场排队买。' },
+  { k:'plan', n:'悬壁长城', p:[39.860,98.220], t:'9/27 08:00', d:'距市区约 14km，沿 45 度山脊攀升，晨光好、人少，约 1–1.5h。联票含。' },
+  { k:'plan', n:'新城魏晋墓画廊', p:[39.920,98.400], t:'9/27 10:00', d:'“地下画廊”，数百座魏晋砖室墓的砖壁画，通常没有别的游客，约 1.5h。' },
+
+  { k:'museum', n:'海西州民族博物馆', p:[37.395,97.420], t:'可选 · 德令哈市区', d:'柴达木规模最大的综合馆。镇馆之宝是乌兰泉沟吐蕃墓出土的珍珠冕旒龙凤狮纹鎏金王冠，还有热水墓群金银器和三具可近距离观看的干尸。约 1.5h。' },
+  { k:'museum', n:'敦煌博物馆', p:[40.145,94.665], t:'可选 · 敦煌市区', d:'免费，系统讲丝路与敦煌历史，有复制窟。莫高窟看不懂的话先来这里打底，约 1–1.5h。' },
+  { k:'museum', n:'嘉峪关长城博物馆', p:[39.806,98.252], t:'可选 · 关城内', d:'在关城景区内、凭联票免费进，中国长城专题馆，逛完关城顺路看，约 40 分钟。' },
+  { k:'museum', n:'嘉峪关城市博物馆', p:[39.780,98.280], t:'可选 · 嘉峪关市区', d:'讲嘉峪关“因矿建企、因企设市”的城市史与西北钢铁工业史，免费，约 1h，航班晚或天气差时的备选。' },
+  { k:'museum', n:'海子诗歌陈列馆', p:[37.369,97.377], t:'可选 · 德令哈市区', d:'“姐姐，今夜我在德令哈”。就在巴音河畔，离全季很近，晚上散步顺路，20–30 分钟。' },
+  { k:'museum', n:'甘肃简牍博物馆（兰州）', p:[36.060,103.780], t:'已取消 · 兰州', d:'本次不去兰州，仅作备注：甘肃简牍、甘肃省博物馆（铜奔马）都在兰州，周二至周日开放、周一闭馆。' },
+
+  { k:'opt', n:'茶卡盐湖', p:[36.780,99.080], t:'9/22 可选', d:'天空之镜，9 月人少。若停这里，傍晚光最好，到德令哈约 21:00。与青海湖观景二选一。' },
+  { k:'opt', n:'金子海', p:[36.880,98.600], t:'9/22 可选', d:'乌兰县沙漠中的淡水小湖，比茶卡冷得多，几乎没人。绕行约 30km，时间紧就跳过。' },
+  { k:'opt', n:'德令哈光热电站', p:[37.350,97.200], t:'9/22 或 9/23 可选', d:'熔盐塔式光热电站，成千面定日镜围成一圈，航拍极其震撼，路边远观也行。' },
+  { k:'opt', n:'柏树山', p:[37.520,97.500], t:'可选 · 德令哈近郊', d:'祁连圆柏林与“江山如此多娇”石刻，去琉璃湖会路过同一卡口。' },
+  { k:'opt', n:'可鲁克湖', p:[37.280,96.800], t:'9/23 可选', d:'淡水湖与鸟岛，9 月是候鸟季，与托素湖合称“情人湖”（一淡一咸）。门票约 20 元。' },
+  { k:'opt', n:'托素湖·外星人遗址', p:[37.150,96.650], t:'9/23 可选（与琉璃湖二选一）', d:'咸水湖加铁管岩洞的猎奇点。注意它在德令哈西南，与东北的琉璃湖方向相反，同一天只能选一个。' },
+  { k:'opt', n:'小柴旦湖', p:[37.500,95.500], t:'9/23 可选', d:'G315 路边的免费湖景，停车拍照 15 分钟，水色很蓝。' },
+  { k:'opt', n:'大柴旦红崖火星基地', p:[37.750,95.150], t:'9/23 可选', d:'中国首个火星模拟实验基地，比冷湖火星营地更冷门、更容易到达，红色地貌像外星球。' },
+  { k:'opt', n:'G315 U 型公路', p:[37.950,94.800], t:'途经', d:'网红起伏路段，因事故多发已禁止路边停车拍照，车上看看即可，别冒险。' },
+  { k:'opt', n:'冷湖石油基地遗址', p:[38.720,93.320], t:'9/24 可选', d:'废弃的“西北小香港”老镇和五号基地公墓，几乎无人，荒芜感极强，黄昏去最出片。' },
+  { k:'opt', n:'黑独山', p:[38.780,93.450], t:'9/24 可选', d:'冷湖东北侧的水墨色山体，“最像月球的地方”。爆火后人多且风大，无人机别贪飞。' },
+  { k:'opt', n:'赛什腾山天文台址', p:[38.630,93.750], t:'9/24 可选', d:'东半球罕见的优质光学天文台址，山下远眺即可，科研区不对外开放。' },
+  { k:'opt', n:'苏干湖', p:[38.880,93.900], t:'9/24 可选', d:'当金山北麓的高原湖与海子草原，候鸟多，顺路观景 30 分钟。' },
+  { k:'opt', n:'多坝沟胡杨峡', p:[39.500,94.050], t:'9/24 可选', d:'阿克塞的峡谷胡杨，9 月底开始泛黄，人极少，是少见的“水 + 胡杨 + 峡谷”组合。' },
+  { k:'opt', n:'西千佛洞', p:[40.040,94.480], t:'9/25 08:00 可选', d:'敦煌西南 35km，党河河谷崖壁上现存 9 窟，游客只有莫高窟零头。8:00 出发、9:40 返回，赶得上 10:30 到数字展示中心。' },
+  { k:'opt', n:'敦煌雅丹魔鬼城', p:[40.530,93.350], t:'可选（需单独半天）', d:'敦煌西 180km，经典是看日落。你 9/25 上午有莫高窟，只能 9/24 傍晚或 9/25 一早去，时间很紧。' },
+  { k:'opt', n:'玉门关·汉长城', p:[40.360,93.870], t:'可选', d:'“春风不度玉门关”，与雅丹同一条西线，两处可串成半天。' },
+  { k:'opt', n:'阳关', p:[39.980,94.070], t:'可选', d:'“西出阳关无故人”，附设阳关博物馆，比玉门关内容多，也在敦煌西线方向。' },
+  { k:'opt', n:'鸣沙山·月牙泉', p:[40.090,94.650], t:'9/24 傍晚或 9/25 清晨', d:'敦煌市区南 5km。清晨人少光好，傍晚可看日落、滑沙、骑骆驼。门票 3 日内可多次入园。' },
+  { k:'opt', n:'锁阳城遗址', p:[40.220,96.150], t:'9/25 或 9/26 可选', d:'世界遗产，唐代瓜州城，玄奘曾在此讲经并收“孙悟空原型”石磐陀为徒。门票+观光车约 70 元。' },
+  { k:'opt', n:'汉武雄风雕塑', p:[40.365,95.905], t:'可选 · 与大地之子同处', d:'红砂岩雕刻的汉武帝头像，就在大地之子旁边，一起看不额外花时间。' },
+  { k:'opt', n:'长城第一墩', p:[39.730,98.300], t:'9/26 傍晚', d:'关城南 7km，讨赖河峡谷上的悬空透明观景台，三处里人最少、最苍凉。旺季 19:30 停止售票。' },
+  { k:'opt', n:'嘉峪关关城', p:[39.802,98.245], t:'9/26 下午', d:'明长城西端起点，联票 110 元（含悬壁长城、第一墩，3 天有效）。16 点后入园避开暴晒，夕阳打在城墙上最出片。' },
+  { k:'opt', n:'黑山岩画', p:[39.900,98.150], t:'9/27 可选', d:'与悬壁长城同方向的峡谷石刻，战国至明代游牧民族凿刻，非常冷门，需徒步约 1.5h。' },
+  { k:'opt', n:'紫轩葡萄酒庄园', p:[39.850,98.350], t:'9/27 可选', d:'河西走廊葡萄酒产区的酒庄与地下酒窖，可参观品酒，航班晚的话下午来这里最省心。' },
+  { k:'opt', n:'方特丝路神画', p:[39.770,98.320], t:'9/27 可选', d:'大型主题乐园，适合亲子或航班很晚的情况，需要整天，谨慎安排。' },
+  { k:'opt', n:'俄博梁·火星营地', p:[38.350,92.750], t:'9/24 上午（硬核可选）', d:'火星一号公路 80km 砂石路：四驱、两车结伴、营地登记并租 GPS 电子围栏（押金约 500 元），无信号无补给，天黑前必须出来。' }
+];
+
+const COLORS = { stay:'#185FA5', plan:'#993C1D', opt:'#7F77DD', museum:'#0F6E56' };
+
+/* ---------- 侧栏：不依赖地图，先渲染 ---------- */
+function renderDays() {
+  const box = document.getElementById('days');
+  days.forEach((d, i) => {
+    const el = document.createElement('div');
+    el.className = 'day';
+    el.innerHTML = '<h2><span class="dot" style="background:' + d.color + '"></span>' + d.date + '</h2>' +
+      '<p><strong style="font-weight:500">' + d.route + '</strong><br>' + d.dist + '<br>' + d.desc + '</p>';
+    el.onclick = () => window.__highlight && window.__highlight(d.id, i, el);
+    box.appendChild(el);
+  });
+}
+renderDays();
+
+/* ---------- Key ---------- */
+function showKeyGate() { document.getElementById('keygate').classList.add('show'); }
+function saveKey() {
+  const v = (document.getElementById('keyinput').value || '').trim();
+  if (!v) return;
+  localStorage.setItem('tmap_key', v);
+  const u = new URL(location.href); u.searchParams.set('key', v);
+  location.href = u.toString();
+}
+
+/* ---------- 等地图 API 就绪 ---------- */
+(function boot() {
+  let waited = 0;
+  const t = setInterval(function () {
+    waited += 100;
+    if (typeof TMap !== 'undefined') { clearInterval(t); initApp(); return; }
+    if (window.__tmapFailed || waited > 8000) {
+      clearInterval(t);
+      if (!window.__TMAP_LOCAL && !window.__TMAP_KEY) showKeyGate();
+    }
+  }, 100);
+})();
+
+/* ---------- 地图主体 ---------- */
+function initApp() {
+const map = new TMap.Map('map', { center: new TMap.LatLng(38.60, 96.80), zoom: 6 });
+
+const styles = { dim: new TMap.PolylineStyle({ color:'rgba(140,140,140,0.35)', width:3, borderWidth:0, lineCap:'round' }) };
+days.forEach(d => {
+  styles[d.id] = new TMap.PolylineStyle({ color:d.color, width:5, borderWidth:1, borderColor:'rgba(255,255,255,0.9)', lineCap:'round' });
+  styles[d.id + '_x'] = new TMap.PolylineStyle({ color:d.color, width:8, borderWidth:2, borderColor:'#fff', lineCap:'round' });
+});
+const geoms = days.map(d => ({ id:d.id, styleId:d.id, paths:d.path.map(c => new TMap.LatLng(c[0], c[1])) }));
+const lineLayer = new TMap.MultiPolyline({ map, styles, geometries: geoms });
+
+function svgPin(color, num) {
+  const label = num ? '<text x="15" y="20" font-size="13" font-weight="600" fill="#fff" text-anchor="middle" font-family="sans-serif">' + num + '</text>' : '';
+  const r = num ? 13 : 8;
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="' + r + '" fill="' + color + '" stroke="#fff" stroke-width="2"/>' + label + '</svg>';
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
+N.forEach((s, i) => { s.uid = i; s.gid = 'g' + i; });
+const stayOrder = {};
+let sc = 0;
+N.forEach(s => { if (s.k === 'stay') { sc++; stayOrder[s.uid] = sc; } });
+
+const mStyles = {};
+N.forEach(s => {
+  mStyles[s.gid] = new TMap.MarkerStyle({
+    width: 30, height: 30,
+    src: svgPin(COLORS[s.k], s.k === 'stay' ? String(stayOrder[s.uid]) : 0),
+    anchor: { x: 15, y: 15 }
+  });
+});
+const mkGeom = s => ({ id: 'm' + s.uid, styleId: s.gid, position: new TMap.LatLng(s.p[0], s.p[1]) });
+
+const fixedLayer = new TMap.MultiMarker({ map, styles: mStyles, geometries: N.filter(s => s.k === 'stay' || s.k === 'plan').map(mkGeom) });
+const optionLayer = new TMap.MultiMarker({ map, styles: mStyles, geometries: N.filter(s => s.k === 'opt' || s.k === 'museum').map(mkGeom) });
+
+const info = new TMap.InfoWindow({ map, position: new TMap.LatLng(37.37, 97.37), content: '', offset: { x: 0, y: -18 }, enableCustom: true });
+info.close();
+
+function showInfo(s) {
+  const tag = { stay:'住宿', plan:'已定', opt:'可选', museum:'博物馆' }[s.k];
+  const color = COLORS[s.k];
+  info.setPosition(new TMap.LatLng(s.p[0], s.p[1]));
+  info.setContent('<div style="position:relative;background:#fff;border:0.5px solid rgba(0,0,0,0.15);border-radius:10px;padding:10px 12px;max-width:260px;font:13px/1.7 -apple-system,PingFang SC,sans-serif;color:#1a1a1a;box-shadow:0 2px 10px rgba(0,0,0,0.12)">' +
+    '<div style="font-weight:500;margin-bottom:4px">' + s.n + '</div>' +
+    '<div style="font-size:12px;margin-bottom:6px"><span style="display:inline-block;padding:0 6px;border-radius:4px;background:' + color + ';color:#fff">' + tag + '</span> <span style="color:#8a8a8a">' + s.t + '</span></div>' +
+    '<div style="font-size:12px;color:#5f5e5a">' + s.d + '</div>' +
+    '<div style="position:absolute;left:50%;bottom:-6px;margin-left:-6px;width:12px;height:12px;background:#fff;border-right:0.5px solid rgba(0,0,0,0.15);border-bottom:0.5px solid rgba(0,0,0,0.15);transform:rotate(45deg)"></div></div>');
+  info.open();
+}
+[fixedLayer, optionLayer].forEach(layer => {
+  layer.on('click', e => {
+    const uid = Number(e.geometry.id.replace('m', ''));
+    showInfo(N[uid]);
+  });
+});
+
+function setFilter(f) {
+  document.querySelectorAll('#filters button').forEach(b => b.classList.toggle('on', b.dataset.f === f));
+  let list = [];
+  if (f === 'all') list = N.filter(s => s.k === 'opt' || s.k === 'museum');
+  else if (f === 'opt') list = N.filter(s => s.k === 'opt');
+  else if (f === 'museum') list = N.filter(s => s.k === 'museum');
+  optionLayer.setGeometries(list.map(mkGeom));
+  info.close();
+}
+
+let current = null;
+function highlight(id, i, el) {
+  if (current === id) {
+    current = null;
+    lineLayer.updateGeometries(geoms);
+    info.close();
+    document.querySelectorAll('.day').forEach(x => x.classList.remove('on'));
+    fitRoute();
+    return;
+  }
+  current = id;
+  lineLayer.updateGeometries(geoms.map(g => ({ id:g.id, styleId: g.id === id ? id + '_x' : 'dim', paths: g.paths })));
+  document.querySelectorAll('.day').forEach(x => x.classList.remove('on'));
+  el.classList.add('on');
+  const path = days[i].path;
+  const lats = path.map(c => c[0]), lons = path.map(c => c[1]);
+  map.fitBounds(new TMap.LatLngBounds(
+    new TMap.LatLng(Math.min.apply(null, lats) - 0.2, Math.min.apply(null, lons) - 0.2),
+    new TMap.LatLng(Math.max.apply(null, lats) + 0.2, Math.max.apply(null, lons) + 0.2)
+  ), { padding: 60 });
+}
+function fitRoute() { map.setCenter(new TMap.LatLng(38.60, 96.80)); map.setZoom(6); }
+function fitChina() { map.setCenter(new TMap.LatLng(36.00, 102.00)); map.setZoom(4); }
+
+window.__highlight = highlight;
+window.fitRoute = fitRoute;
+window.fitChina = fitChina;
+window.setFilter = setFilter;
+} /* end initApp */
+</script>
+</body>
+</html>
