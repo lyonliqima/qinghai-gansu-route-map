@@ -29,6 +29,26 @@
   .sec.food b { color: #8A5A00; }
   .general { margin-top: 12px; border-top: 0.5px solid rgba(0,0,0,0.12); padding-top: 12px; font-size: 11.5px; color: #5f5e5a; line-height: 1.8; }
   .general b { display: block; font-size: 12px; color: #3a3a3a; margin-bottom: 4px; font-weight: 500; }
+  #tabs { display: none; }
+
+  /* ---------- 手机 / 窄屏 ---------- */
+  @media (max-width: 820px) {
+    #tabs { display: flex; gap: 8px; padding: 7px 10px; background: #fafaf8; border-bottom: 0.5px solid rgba(0,0,0,0.12); }
+    #tabs button { flex: 1; font-size: 14px; padding: 9px 0; border: 1px solid rgba(0,0,0,0.22); background: #fff; border-radius: 9px; color: #1a1a1a; }
+    #tabs button.on { background: #185FA5; color: #fff; border-color: #185FA5; }
+    #wrap { flex-direction: column; height: calc(100vh - 53px); height: calc(100dvh - 53px); }
+    #side { width: 100%; flex: 1 1 auto; height: 100%; border-right: none; padding: 14px 14px 24px; -webkit-overflow-scrolling: touch; }
+    #map { width: 100%; height: 100%; }
+    body.tab-list #map { display: none; }
+    body.tab-map #side { display: none; }
+    h1 { font-size: 17px; }
+    .sub { font-size: 12.5px; }
+    .row button { font-size: 13px; padding: 9px 4px; }
+    .day { padding: 13px 14px; }
+    .day p { font-size: 12.5px; }
+    .day .sec li { font-size: 12.5px; line-height: 1.8; }
+    .legend, .general { font-size: 12.5px; line-height: 2; }
+  }
   .legend { font-size: 12px; color: #6b6b6b; line-height: 1.9; margin-top: 10px; border-top: 0.5px solid rgba(0,0,0,0.12); padding-top: 12px; }
   .tip { font-size: 11px; color: #8a8a8a; line-height: 1.6; margin-top: 10px; }
   #keygate { position: fixed; inset: 0; z-index: 99; display: none; align-items: center; justify-content: center; background: rgba(20,20,20,0.35); backdrop-filter: blur(2px); }
@@ -67,15 +87,19 @@
 })();
 </script>
 </head>
-<body data-page-node-id="b0ozagqcXArqu0hWhBKF2o">
+<body class="tab-map" data-page-node-id="b0ozagqcXArqu0hWhBKF2o">
+<div id="tabs">
+  <button id="tabMap" onclick="showTab('map')">地图</button>
+  <button id="tabList" onclick="showTab('list')">行程 · 注意 · 吃饭</button>
+</div>
 <div id="wrap" data-page-node-id="pjXQJ8ZHxZDOqWabvk1M93">
   <div id="side" data-page-node-id="xaxI4IDi0oL2gy2YBLFRJ1">
     <h1 data-page-node-id="7W3IO9CCvluwZpPxBJmhoy">青甘自驾 · 9/22–9/27</h1>
     <p class="sub" data-page-node-id="24vuT9i5QYJVBMI5qv9uHG">西宁曹家堡机场出发，嘉峪关机场飞走，全程约 2100km。地图共 41 个点，点击标记看说明；点击某一天可高亮当天路线。每天卡片下方有<b>注意事项</b>和<b>吃饭推荐</b>（餐厅只写在侧栏，不在地图上标注）。</p>
 
     <div class="row" data-page-node-id="GIbTWVv3JQdLoCOL3vGzDE">
-      <button onclick="fitRoute()" data-page-node-id="3mI8wgbHB8pidQEJOqaxMn">行程视图</button>
-      <button onclick="fitChina()" data-page-node-id="4I8ReLkJdfz2maV8QyCTGf">全国视图</button>
+      <button onclick="goFit('route')" data-page-node-id="3mI8wgbHB8pidQEJOqaxMn">行程视图</button>
+      <button onclick="goFit('china')" data-page-node-id="4I8ReLkJdfz2maV8QyCTGf">全国视图</button>
     </div>
     <div class="row" id="filters" data-page-node-id="yMURGKfS1cEx8igvgGLBx3">
       <button data-f="all" class="on" onclick="setFilter('all')" data-page-node-id="67nNH8H0UuDTcgzg3Jw9Xh">全部点</button>
@@ -284,6 +308,25 @@ const N = [
 const COLORS = { stay:'#185FA5', plan:'#993C1D', opt:'#7F77DD', museum:'#0F6E56' };
 
 /* ---------- 侧栏：不依赖地图，先渲染 ---------- */
+/* ---------- 手机端：地图 / 行程 切换 ---------- */
+function isNarrow() { return window.matchMedia && window.matchMedia('(max-width: 820px)').matches; }
+function showTab(t) {
+  document.body.classList.toggle('tab-map', t === 'map');
+  document.body.classList.toggle('tab-list', t === 'list');
+  const a = document.getElementById('tabMap'), b = document.getElementById('tabList');
+  if (a) a.classList.toggle('on', t === 'map');
+  if (b) b.classList.toggle('on', t === 'list');
+  // 容器被隐藏再显示后，通知地图重算尺寸
+  window.dispatchEvent(new Event('resize'));
+  setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 150);
+}
+showTab('map');
+function goFit(which) {
+  const fn = which === 'china' ? window.fitChina : window.fitRoute;
+  if (isNarrow()) showTab('map');
+  setTimeout(() => fn && fn(), isNarrow() ? 200 : 0);
+}
+
 function sec(title, items, cls) {
   if (!items || !items.length) return '';
   return '<div class="sec ' + cls + '"><b>' + title + '</b><ul>' +
@@ -297,7 +340,11 @@ function renderDays() {
     el.innerHTML = '<h2><span class="dot" style="background:' + d.color + '"></span>' + d.date + '</h2>' +
       '<p><strong style="font-weight:500">' + d.route + '</strong><br>' + d.dist + '<br>' + d.desc + '</p>' +
       sec('注意', d.notes, 'note') + sec('吃什么', d.food, 'food');
-    el.onclick = () => window.__highlight && window.__highlight(d.id, i, el);
+    el.onclick = () => {
+      // 手机端：点某一天时自动切回地图，等地图重算完尺寸再定位
+      if (isNarrow()) showTab('map');
+      setTimeout(() => window.__highlight && window.__highlight(d.id, i, el), isNarrow() ? 200 : 0);
+    };
     box.appendChild(el);
   });
 }
@@ -370,7 +417,8 @@ function showInfo(s) {
   const tag = { stay:'住宿', plan:'已定', opt:'可选', museum:'博物馆' }[s.k];
   const color = COLORS[s.k];
   info.setPosition(new TMap.LatLng(s.p[0], s.p[1]));
-  info.setContent('<div style="position:relative;background:#fff;border:0.5px solid rgba(0,0,0,0.15);border-radius:10px;padding:10px 12px;max-width:260px;font:13px/1.7 -apple-system,PingFang SC,sans-serif;color:#1a1a1a;box-shadow:0 2px 10px rgba(0,0,0,0.12)">' +
+  const w = Math.max(200, Math.min(260, window.innerWidth - 70));
+  info.setContent('<div style="position:relative;background:#fff;border:0.5px solid rgba(0,0,0,0.15);border-radius:10px;padding:10px 12px;max-width:' + w + 'px;font:13px/1.7 -apple-system,PingFang SC,sans-serif;color:#1a1a1a;box-shadow:0 2px 10px rgba(0,0,0,0.12)">' +
     '<div style="font-weight:500;margin-bottom:4px">' + s.n + '</div>' +
     '<div style="font-size:12px;margin-bottom:6px"><span style="display:inline-block;padding:0 6px;border-radius:4px;background:' + color + ';color:#fff">' + tag + '</span> <span style="color:#8a8a8a">' + s.t + '</span></div>' +
     '<div style="font-size:12px;color:#5f5e5a">' + s.d + '</div>' +
