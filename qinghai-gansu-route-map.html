@@ -79,6 +79,18 @@
 </script>
 <script type="text/javascript">
 (function () {
+  // 静默地图 SDK 的鉴权类 alert（避免打扰，只在控制台留记录）
+  var rawAlert = window.alert;
+  window.alert = function (m) {
+    if (typeof m === 'string' && /鉴权|授权|key|quota|配额/i.test(m)) { console.warn('[地图] ' + m); return; }
+    return rawAlert.apply(window, arguments);
+  };
+  // 只有网址带 ?setkey=1 时才允许显示 Key 相关界面，平时一律不弹
+  window.__SHOW_KEY_UI = new URLSearchParams(location.search).get('setkey') === '1';
+})();
+</script>
+<script type="text/javascript">
+(function () {
   var s = document.createElement('script');
   s.src = 'https://map.qq.com/api/gljs?v=1.exp' + (window.__TMAP_KEY ? '&key=' + encodeURIComponent(window.__TMAP_KEY) : '');
   s.async = false;
@@ -351,7 +363,10 @@ function renderDays() {
 renderDays();
 
 /* ---------- Key ---------- */
-function showKeyGate() { document.getElementById('keygate').classList.add('show'); }
+function showKeyGate() {
+  if (!window.__SHOW_KEY_UI) { console.warn('[地图] 底图未渲染，若需配置 Key 请在网址后加 ?setkey=1'); return; }
+  document.getElementById('keygate').classList.add('show');
+}
 function saveKey() {
   const v = (document.getElementById('keyinput').value || '').trim();
   if (!v) return;
@@ -471,10 +486,22 @@ window.fitRoute = fitRoute;
 window.fitChina = fitChina;
 window.setFilter = setFilter;
 
-// 兜底：接口加载了但底图没渲染（Key 无效或域名白名单未配），提示重新填 Key
-setTimeout(function () {
-  if (!document.querySelector('#map canvas')) showKeyGate();
-}, 3500);
+// 若 SDK 往地图容器里插入鉴权/报错浮层，直接隐藏（静默处理，不打扰）
+try {
+  const mo = new MutationObserver(function (muts) {
+    muts.forEach(function (m) {
+      Array.prototype.forEach.call(m.addedNodes, function (n) {
+        if (n.nodeType !== 1 || n.tagName === 'CANVAS') return;
+        const t = (n.textContent || '').trim();
+        if (t && t.length < 300 && /鉴权|未授权|授权失败|无效的.*key|key.*无效|非法.*key/i.test(t)) {
+          n.style.setProperty('display', 'none', 'important');
+        }
+      });
+    });
+  });
+  mo.observe(document.getElementById('map'), { childList: true, subtree: true });
+  setTimeout(function () { mo.disconnect(); }, 12000);
+} catch (e) {}
 } /* end initApp */
 </script>
 </body>
