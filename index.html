@@ -7,7 +7,7 @@
 <style>
   html, body { margin: 0; padding: 0; height: 100%; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; color: #1a1a1a; }
   #wrap { display: flex; height: 100vh; }
-  #side { width: 350px; flex: 0 0 350px; overflow-y: auto; background: #fafaf8; border-right: 0.5px solid rgba(0,0,0,0.12); padding: 16px; box-sizing: border-box; }
+  #side { width: 400px; flex: 0 0 400px; overflow-y: auto; background: #fafaf8; border-right: 0.5px solid rgba(0,0,0,0.12); padding: 16px; box-sizing: border-box; }
   #map { flex: 1; height: 100vh; }
   h1 { font-size: 15px; font-weight: 500; margin: 0 0 4px; }
   .sub { font-size: 12px; color: #6b6b6b; margin: 0 0 12px; line-height: 1.6; }
@@ -20,6 +20,15 @@
   .day h2 { font-size: 13px; font-weight: 500; margin: 0 0 2px; display: flex; align-items: center; gap: 8px; }
   .dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 10px; display: inline-block; }
   .day p { font-size: 12px; color: #6b6b6b; margin: 4px 0 0; line-height: 1.7; }
+  .day .sec { margin-top: 9px; padding-top: 8px; border-top: 0.5px dashed rgba(0,0,0,0.14); }
+  .day .sec b { display: block; font-size: 11.5px; font-weight: 500; margin-bottom: 3px; letter-spacing: .3px; }
+  .day .sec ul { margin: 0; padding-left: 16px; }
+  .day .sec li { font-size: 11.5px; line-height: 1.75; color: #5f5e5a; margin-bottom: 2px; }
+  .day .sec li b { display: inline; font-size: 11.5px; font-weight: 600; }
+  .sec.note b { color: #B03A2E; }
+  .sec.food b { color: #8A5A00; }
+  .general { margin-top: 12px; border-top: 0.5px solid rgba(0,0,0,0.12); padding-top: 12px; font-size: 11.5px; color: #5f5e5a; line-height: 1.8; }
+  .general b { display: block; font-size: 12px; color: #3a3a3a; margin-bottom: 4px; font-weight: 500; }
   .legend { font-size: 12px; color: #6b6b6b; line-height: 1.9; margin-top: 10px; border-top: 0.5px solid rgba(0,0,0,0.12); padding-top: 12px; }
   .tip { font-size: 11px; color: #8a8a8a; line-height: 1.6; margin-top: 10px; }
   #keygate { position: fixed; inset: 0; z-index: 99; display: none; align-items: center; justify-content: center; background: rgba(20,20,20,0.35); backdrop-filter: blur(2px); }
@@ -60,7 +69,7 @@
 <div id="wrap" data-page-node-id="pjXQJ8ZHxZDOqWabvk1M93">
   <div id="side" data-page-node-id="xaxI4IDi0oL2gy2YBLFRJ1">
     <h1 data-page-node-id="7W3IO9CCvluwZpPxBJmhoy">青甘自驾 · 9/22–9/27</h1>
-    <p class="sub" data-page-node-id="24vuT9i5QYJVBMI5qv9uHG">西宁曹家堡机场出发，嘉峪关机场飞走，全程约 2100km。地图共 41 个点，点击标记看说明；点击某一天可高亮当天路线。</p>
+    <p class="sub" data-page-node-id="24vuT9i5QYJVBMI5qv9uHG">西宁曹家堡机场出发，嘉峪关机场飞走，全程约 2100km。地图共 41 个点，点击标记看说明；点击某一天可高亮当天路线。每天卡片下方有<b>注意事项</b>和<b>吃饭推荐</b>（餐厅只写在侧栏，不在地图上标注）。</p>
 
     <div class="row" data-page-node-id="GIbTWVv3JQdLoCOL3vGzDE">
       <button onclick="fitRoute()" data-page-node-id="3mI8wgbHB8pidQEJOqaxMn">行程视图</button>
@@ -81,7 +90,17 @@
       <div data-page-node-id="T1W4vc1nu8eRj0Qaf7uhWK"><span class="dot" style="background:#7F77DD" data-page-node-id="2cqXC5I4ZKAs4q8DDOHHWq"></span> 紫色 = 可选加的点</div>
       <div data-page-node-id="w99T88Dw1NTAZJbuVUoiZG"><span class="dot" style="background:#0F6E56" data-page-node-id="Hya8HhKDm9OrsE5II7pVDz"></span> 绿色 = 博物馆 / 文化馆</div>
     </div>
-    <p class="tip" data-page-node-id="xEY7oLEH8OEekDUyZSfa6l">点位为 GCJ-02 近似坐标，用于行程示意；实际导航请以地图 App 搜索的景区大门为准。底图为腾讯地图，国界与行政区划按国家标准绘制。</p>
+    <div class="general">
+      <b>全程通用提醒</b>
+      · <b>加油</b>：见中石化/中石油就加，按半箱原则，别等灯亮。<br>
+      · <b>限速</b>：青甘高速区间测速密集，戈壁直路容易不自觉超速。<br>
+      · <b>信号</b>：琉璃湖、俄博梁、G315 部分路段移动无服务，提前下离线地图与轨迹。<br>
+      · <b>高反</b>：前两天别剧烈运动、别喝酒，随身保温杯喝温水。<br>
+      · <b>天气</b>：9 月底白天 20–25℃、夜间 0–5℃，冲锋衣 + 防晒 + 墨镜都要带。<br>
+      · <b>现金</b>：夜市小摊和部分老店只收现金，备两三百。<br>
+      · <b>预订</b>：莫高窟 A 类票提前 30 天早 7:00 放票，通常几分钟售罄。
+    </div>
+    <p class="tip" data-page-node-id="xEY7oLEH8OEekDUyZSfa6l">点位为 GCJ-02 近似坐标，用于行程示意；实际导航请以地图 App 搜索的景区大门为准。底图为腾讯地图，国界与行政区划按国家标准绘制。餐厅信息来自公开点评，营业时间可能变动，出发前请再确认。</p>
   </div>
   <div id="map" data-page-node-id="N8t0fQ6ZCXlt7uepYYL3FP"></div>
 </div>
@@ -106,21 +125,105 @@
 const days = [
   { id:'d1', color:'#185FA5', date:'9/22 周二', route:'西宁机场 → 德令哈', dist:'约 500km · 5.5h',
     desc:'12:00 出发。沿途二选一：青海湖南岸观景台（免费）或茶卡盐湖傍晚。住德令哈全季。',
+    notes:[
+      '落地取车、办手续约 1 小时，实际 13:00 左右才上路，别按 12:00 算里程。',
+      '海拔 2260 → 2980m：第一晚<b>别喝酒、别剧烈运动</b>，早点睡，多喝温水。',
+      'G6 京藏高速区间测速多，全程别超速；沿途电子眼密集。',
+      '在茶卡或德令哈把油加满——再往西加油站明显变少。',
+      '9 月下旬日落约 19:50，20:30 后天全黑，别摸黑赶景点。'
+    ],
+    food:[
+      '路上：西宁机场先吃或带干粮，乌兰/茶卡服务区选择很少。',
+      '晚餐 · 德令哈：<b>高原牦牛退骨肉（总店）</b>——格尔木西路市政府斜对面，人均约 75，11:00–21:00。"退骨"是吃完把骨头还给店家过秤、只算吃掉的肉钱。',
+      '想吃炕锅羊肉：<b>阿斯玛特色干锅炕锅美食城</b>（老火车站融城国际楼下）或 <b>名羊阁炕锅烤羊肉</b>。',
+      '夜宵/烧烤：<b>老严烤羊肉总店</b>（柴达木西路 34 号）。'
+    ],
     path:[[36.530,102.040],[36.68,101.26],[36.60,100.30],[36.78,99.08],[37.375,97.372]] },
   { id:'d2', color:'#0F6E56', date:'9/23 周三', route:'德令哈 → 冷湖镇', dist:'约 520km · 6h',
     desc:'07:30 出发，琉璃湖 2h（上午光最好），下午大柴旦翡翠湖，夜宿冷湖看星空。',
+    notes:[
+      '全程最赶的一天（约 520km），<b>07:30 必须出门</b>——晚一小时天黑就还在戈壁上。',
+      '琉璃湖：进山卡口要<b>登记身份证+车牌</b>；末段 15km 非铺装河谷路，涉水滩，移动全程无信号，提前下离线地图。',
+      '<b>天气不好千万别进琉璃湖</b>，8 月都有人遇到十分钟内突降冰雹、河谷漫水。',
+      '德令哈出发前加满油；车上备足水、干粮、充电宝。',
+      '大柴旦→冷湖 G315 段大车多、横风大，超车谨慎；G315 U 型公路已禁停拍照。',
+      '冷湖夜里接近 0℃，冲锋衣必带；晴天务必抬头——全国顶级暗夜保护区。'
+    ],
+    food:[
+      '早餐：07:30 出发多数店没开，全季打包或自带。',
+      '午餐：回德令哈市区吃，或赶到大柴旦镇——<b>来生缘餐厅</b>（创新街 10 号，牦牛铜火锅·炕锅，人均约 60）、<b>清味轩</b>（人民西路，新疆菜）。',
+      '晚餐：冷湖镇选择极少，<b>建议在德令哈或大柴旦买好干粮</b>（馕、饼、水果、水），镇上只有零星川菜小炒。',
+      '大柴旦别进"网红炕锅"和翡翠湖景区内餐厅，性价比极低；水在镇上超市买好再进景区。'
+    ],
     path:[[37.375,97.372],[37.63,96.75],[37.848,95.303],[37.858,95.240],[38.10,94.30],[38.746,93.380]] },
   { id:'d3', color:'#BA7517', date:'9/24 周四', route:'冷湖 → 敦煌', dist:'约 450km · 5.5h',
     desc:'俄博梁火星营地（需四驱+办手续）或冷湖石油遗址；经当金山口、阿克塞石油小镇到敦煌。',
+    notes:[
+      '进俄博梁：四驱 + 至少两车结伴 + 营地登记并租 GPS 电子围栏（押金约 500），<b>无信号无补给，天黑前必须驶出</b>。不进就改去冷湖石油基地遗址。',
+      '翻当金山口（海拔约 3600m）弯多坡陡，注意大车与落石。',
+      '冷湖出发前加满油，G215 沿途加油站稀少。',
+      '阿克塞石油小镇停车 10 元、停留 1 小时足够，别耽误到天黑。',
+      '进俄博梁约 19:30 到敦煌；不进则 16:00 就到，够加一场<b>鸣沙山日落</b>（门票 3 天内可多次入园）。'
+    ],
+    food:[
+      '早餐：冷湖镇简餐（选择很少，将就一顿）。',
+      '午餐：阿克塞县城或路上简餐，建议车上备干粮兜底。',
+      '晚餐 · 敦煌：<b>沙洲夜市（敦煌食局）</b>——驴肉黄面、胡羊焖饼、沙葱牛肉饼、红柳烤肉、杏皮水，人均 50–70 就能吃全。20:00–23:00 氛围最好。',
+      '想坐店里吃老店：<b>达记酱驴肉黄面</b>（西域路天润国际大酒店南门旁）、<b>顺张黄面馆</b>（金山路滨河世纪家园 1 号楼，非遗百年老店）。',
+      '羊肉：<b>靖远尕六美味羊羔肉</b>（沙州乐园东门口）；解腻喝 <b>刘红杏杏皮水</b>。'
+    ],
     path:[[38.746,93.380],[39.290,94.280],[39.630,94.290],[40.142,94.662]] },
   { id:'d4', color:'#993C1D', date:'9/25 周五', route:'敦煌 → 瓜州', dist:'约 130km · 1.5h',
     desc:'莫高窟 11:00 场次（10:30 前到数字展示中心），下午瓜州大地之子看日落，住瓜州。',
+    notes:[
+      '<b>10:30 前必须到莫高窟数字展示中心</b>（不是窟区，窟区不售票），带身份证换票，迟到票作废。',
+      'A 类流程约 3.5 小时：电影 40 分钟 + 摆渡车 15 分钟 + 8 个洞窟约 1.5h，14:30 左右出来。',
+      '<b>洞窟内严禁拍照</b>，背包/相机有寄存处；特窟 11:00–14:00 现场排队发售（150–200 元/窟，每小时 100 张）。',
+      '早上 8:00 的空档可选<b>西千佛洞</b>（敦煌西南 35km），9:40 返回仍赶得上。',
+      '大地之子在柳格高速边、免费，<b>别在行车道停车</b>，停指定停车区再走过去。',
+      '瓜州日落约 19:20，看完回县城约 40 分钟。'
+    ],
+    food:[
+      '早餐：<b>杨老七羊肉粉汤</b>（金山路滨河世纪家园北门，6:00–14:00，12 点后汤底常卖光）或 <b>夏家合汁</b>（西域路天润花园，羊肉合汁：夹沙、丸子、粉条、豆腐）。',
+      '午餐：14:30 出莫高窟后在敦煌市区吃，或带到路上。想省时间就前一天买好干粮。',
+      '晚餐 · 瓜州县城：<b>水漠天胡羊焖饼·手抓羊羔肉</b>（常乐路丽水嘉苑西门对面，人均约 59）、<b>马有布牛肉面</b>（尚城华庭底商）。',
+      '瓜州蜜瓜、西瓜便宜好吃，路边正规瓜农摊位买，别信"免费尝瓜"后再强卖的。',
+      '避雷：瓜州高速出口的"戈壁餐厅"是宰客重灾区，一碗拉面 38 元还强制配小菜。'
+    ],
     path:[[40.142,94.662],[40.35,95.20],[40.522,95.781],[40.360,95.920]] },
   { id:'d5', color:'#7F77DD', date:'9/26 周六', route:'瓜州 → 嘉峪关', dist:'约 330km · 4h',
     desc:'上午榆林窟，下午嘉峪关关城 + 长城第一墩。联票 110 元、3 天有效。',
+    notes:[
+      '<b>榆林窟 9:00 开园、17:30 停止入园</b>；在瓜州南 75km，往返约 2.5h。特窟现场限量，早去先问。',
+      '榆林窟洞窟内同样<b>禁拍</b>，讲解员带看，全程约 2h。带手电——部分洞窟光线很暗。',
+      '嘉峪关联票 <b>110 元含关城+悬壁长城+长城第一墩，3 天有效</b>（单买约 160），所以 9/27 上午还能用同一张。',
+      '关城 19:30 停止售票、20:00 闭园；三处之间有免费接驳车，停车 10 元/次。',
+      '<b>长城第一墩 17:30 后光线最好</b>，人也最少，建议放傍晚。'
+    ],
+    food:[
+      '早餐：瓜州县城牛肉面（马有布），或酒店附近解决。',
+      '午餐：路上简餐，或到嘉峪关吃 <b>鲍福记羊肉粉汤（富强路总店）</b>，人均约 36，07:30–22:30。',
+      '晚餐 · 富强市场夜市：烤肉是嘉峪关的招牌——<b>眼镜烤肉城</b>（30 年老店）、<b>李大胡子烤肉</b>（C 区 6 号，16:30–凌晨 2 点）、<b>小党烤肉总店</b>（胜利南路 10 号，上过《舌尖》）。',
+      '想坐下来吃：<b>老贺家焖饼</b>（建设西路 12 号，羊肉焖饼）、<b>陶然居</b>（雄关广场附近，雪山驼掌）。'
+    ],
     path:[[40.522,95.781],[40.040,95.930],[40.522,95.781],[40.300,97.730],[39.796,98.278]] },
   { id:'d6', color:'#D4537E', date:'9/27 周日', route:'嘉峪关 → 机场', dist:'市区约 13km',
     desc:'晨光爬悬壁长城，上午新城魏晋墓砖壁画博物馆，午餐后机动，晚间航班离开。',
+    notes:[
+      '<b>悬壁长城 08:00 去</b>：晨光好、人少，沿 45° 山脊爬升约 1–1.5h，穿防滑鞋、带水。',
+      '新城魏晋墓砖壁画博物馆约 1.5h，馆内温度低，带件外套。',
+      '机场在市区东北约 13km、车程 20 分钟，小机场提前 <b>1.5–2 小时</b>到即可。',
+      '<b>还车要留时间</b>：先确认租车行机场网点营业时间，有些 18:00 就下班。',
+      '9 月河西走廊昼夜温差 15℃+，早晚冲锋衣、白天短袖+防晒。',
+      '航班若晚于 19:00，下午还能加紫轩葡萄酒庄园或黑山岩画。'
+    ],
+    food:[
+      '早餐：<b>滚记糊锅</b>（新华北路十四栋附近，6:00–12:00，卖完即止）——糊锅是鸡汤勾芡加麻花、粉皮、面筋，配一个烧壳子泡进去，本地人的早餐顶流。',
+      '备选：<b>马松吉清真糊锅</b>（迎宾路中段，6:00–10:00，限量）；起不来的话牛肉面随处都有。',
+      '午餐：<b>老贺家焖饼</b>（建设西路 12 号）或 <b>老马家羊羔肉</b>（胜利南路 16 号，黄焖羊羔肉、羊血肠）。',
+      '想清淡点：<b>小李麻辣烫</b>（新华中路 113 号），西北风味，辣油香而不燥。',
+      '机场路上可带点当地瓜果、李广杏干当手信。'
+    ],
     path:[[39.796,98.278],[39.860,98.220],[39.920,98.400]] }
 ];
 
@@ -180,13 +283,19 @@ const N = [
 const COLORS = { stay:'#185FA5', plan:'#993C1D', opt:'#7F77DD', museum:'#0F6E56' };
 
 /* ---------- 侧栏：不依赖地图，先渲染 ---------- */
+function sec(title, items, cls) {
+  if (!items || !items.length) return '';
+  return '<div class="sec ' + cls + '"><b>' + title + '</b><ul>' +
+    items.map(t => '<li>' + t + '</li>').join('') + '</ul></div>';
+}
 function renderDays() {
   const box = document.getElementById('days');
   days.forEach((d, i) => {
     const el = document.createElement('div');
     el.className = 'day';
     el.innerHTML = '<h2><span class="dot" style="background:' + d.color + '"></span>' + d.date + '</h2>' +
-      '<p><strong style="font-weight:500">' + d.route + '</strong><br>' + d.dist + '<br>' + d.desc + '</p>';
+      '<p><strong style="font-weight:500">' + d.route + '</strong><br>' + d.dist + '<br>' + d.desc + '</p>' +
+      sec('注意', d.notes, 'note') + sec('吃什么', d.food, 'food');
     el.onclick = () => window.__highlight && window.__highlight(d.id, i, el);
     box.appendChild(el);
   });
