@@ -51,7 +51,9 @@
   var LOCAL = RAW_PROXY.indexOf('__WB_') === -1;
   var q = new URLSearchParams(location.search);
   window.__TMAP_LOCAL = LOCAL;
-  window.__TMAP_KEY = q.get('key') || localStorage.getItem('tmap_key') || '';
+  // 内置 Key（域名白名单需含 lyonliqima.github.io）；URL ?key= 或 localStorage 可覆盖
+  var DEFAULT_KEY = 'G6MBZ-QGREQ-R3F5C-2S3CU-G3RD2-ZUBRQ';
+  window.__TMAP_KEY = q.get('key') || localStorage.getItem('tmap_key') || DEFAULT_KEY;
   window._TMapSecurityConfig = { serviceHost: LOCAL ? RAW_PROXY : 'https://apis.map.qq.com' };
 })();
 </script>
@@ -107,12 +109,11 @@
 
 <div id="keygate">
   <div class="card">
-    <h3>需要腾讯地图 Key 才能显示底图</h3>
-    <p>本页在 GitHub Pages 上运行时，地图底图要走腾讯位置服务官方接口，需要一个免费 Key：<br>
-    1. 打开 <a href="https://lbs.qq.com/dev/console/application/mine" target="_blank" rel="noopener">lbs.qq.com</a> 注册并创建应用，拿到 Key；<br>
-    2. 在该 Key 的「域名白名单」里填上 <code>lyonliqima.github.io</code>；<br>
-    3. Key 会保存在这台设备的浏览器里，之后打开就不用再填。<br>
-    也可以直接在网址后面加 <code>?key=你的Key</code> 打开。</p>
+    <h3>底图没能加载出来</h3>
+    <p>页面已内置一个 Key，正常打开应该直接出图。如果卡在这里，多半是这个 Key 的<b>域名白名单</b>没配上，或配额用尽：<br>
+    1. 打开 <a href="https://lbs.qq.com/dev/console/application/mine" target="_blank" rel="noopener">lbs.qq.com</a>，在这个 Key 的「域名白名单」里填上 <code>lyonliqima.github.io</code>（改完约 5 分钟生效）；<br>
+    2. 或者换一个你自己申请的 Key 粘到下面，会存在这台设备的浏览器里，之后打开不用再填；<br>
+    3. 也可以直接在网址后面加 <code>?key=你的Key</code> 打开。</p>
     <input id="keyinput" type="text" placeholder="粘贴腾讯地图 Key" autocomplete="off">
     <div class="btns">
       <button onclick="document.getElementById('keygate').classList.remove('show')">稍后再说</button>
@@ -421,6 +422,11 @@ window.__highlight = highlight;
 window.fitRoute = fitRoute;
 window.fitChina = fitChina;
 window.setFilter = setFilter;
+
+// 兜底：接口加载了但底图没渲染（Key 无效或域名白名单未配），提示重新填 Key
+setTimeout(function () {
+  if (!document.querySelector('#map canvas')) showKeyGate();
+}, 3500);
 } /* end initApp */
 </script>
 </body>
